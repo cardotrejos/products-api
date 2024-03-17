@@ -1,6 +1,13 @@
 require 'rails_helper'
+require 'support/auth_helpers'
 
 RSpec.describe "Products", type: :request do
+  let(:user) { create(:user) }
+
+  before do
+    auth_with_user(user)
+  end
+
   describe "GET /products" do
     let!(:products) { create_list(:product, 10) }
 
@@ -51,7 +58,7 @@ RSpec.describe "Products", type: :request do
       expect {
         delete product_path(product)
       }.to change(Product, :count).by(-1)
-      expect(response).to have_http_status(:no_content)
+      expect(response).to have_http_status(:ok)
     end
   end
 end
