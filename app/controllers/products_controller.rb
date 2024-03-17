@@ -33,8 +33,11 @@ class ProductsController < ApplicationController
 
   # DELETE /products/:id
   def destroy
-    @product.destroy
-    head :no_content
+    if @product.destroy
+      render json: { message: "Product deleted successfully" }, status: :ok
+    else
+      render json: @product.errors, status: :unprocessable_entity
+    end
   end
 
   private
