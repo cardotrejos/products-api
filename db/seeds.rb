@@ -23,6 +23,8 @@ auto_parts = [
   { name: "Exhaust System", description: "High-performance exhaust system for improved airflow and sound.", price: 259 },
 ]
 
+User.create!(username: "admin_products", password: "admin1234@")
+
 auto_parts.each do |part|
   Product.create!(part)
 end
